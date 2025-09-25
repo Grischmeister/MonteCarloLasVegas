@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="402dfd52-51d8-402d-8515-a561a0b60d34" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/algorithms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/evaluator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/experiments.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_evaluator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/MonteCarloLasVegas.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MonteCarloLasVegas.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/deck.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/deck.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +23,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="338d0eNFKVw3TtGKehfugrfxvME" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -42,32 +34,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Python tests for tests.test_evaluator.test_flush.executor": "Run",
-    "Python tests.Python tests for tests.test_evaluator.test_four_of_a_kind.executor": "Run",
-    "Python tests.Python tests for tests.test_evaluator.test_full_house.executor": "Run",
-    "Python tests.Python tests for tests.test_evaluator.test_high_card.executor": "Run",
-    "Python tests.Python tests for tests.test_evaluator.test_one_pair.executor": "Run",
-    "Python tests.Python tests for tests.test_evaluator.test_royal_flush.executor": "Run",
-    "Python tests.Python tests for tests.test_evaluator.test_straight_flush.executor": "Run",
-    "Python tests.Python tests for tests.test_evaluator.test_straight_wheel.executor": "Run",
-    "Python tests.Python tests for tests.test_evaluator.test_three_of_a_kind.executor": "Run",
-    "Python tests.Python tests for tests.test_evaluator.test_two_pair.executor": "Run",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests for tests.test_evaluator.test_flush.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_evaluator.test_four_of_a_kind.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_evaluator.test_full_house.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_evaluator.test_high_card.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_evaluator.test_one_pair.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_evaluator.test_royal_flush.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_evaluator.test_straight_flush.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_evaluator.test_straight_wheel.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_evaluator.test_three_of_a_kind.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_evaluator.test_two_pair.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MonteCarloLasVegas" />
@@ -181,7 +173,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1758702411849</updated>
-      <workItem from="1758702412867" duration="14097000" />
+      <workItem from="1758702412867" duration="14652000" />
+      <workItem from="1758789647757" duration="1609000" />
     </task>
     <servers />
   </component>
@@ -190,6 +183,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MonteCarloLasVegas$.coverage" NAME=" Coverage Results" MODIFIED="1758714998010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MonteCarloLasVegas$main.coverage" NAME="main Coverage Results" MODIFIED="1758720876413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MonteCarloLasVegas$main.coverage" NAME="main Coverage Results" MODIFIED="1758790981405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
