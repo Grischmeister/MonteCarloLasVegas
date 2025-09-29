@@ -1,100 +1,116 @@
 # src/evaluator.py
 
-from collections import Counter
+from typing import List, Tuple
 
-ranks = "23456789TJQKA"
-suits = "DHCS"
+RANKS = "23456789TJQKA"
+rank_value = {r: i for i, r in enumerate(RANKS, start=2)}
 
-rank_value = {r: i for i, r in enumerate(ranks, start=2)}
+SUITS = "DHCS"
+suit_value = {s: i for i, s in enumerate(SUITS)}
 
-def evaluate_hand(cards):
+def evaluate_hand(cards: List[str]) -> Tuple[int, List[int]]:
     """
-    :param cards: list of strings, for example ['AS','KH','QD','JC','TC','7D','2C']
-    :return: (Category, Tiebreaker) for comparison
-    Categories:
-        9 = Royal Flush
-        8 = Straight Flush
-        7 = Quads
-        6 = Full House
-        5 = Flush
-        4 = Straight
-        3 = Trips
-        2 = Two Pair
-        1 = Pair
-        0 = High Card
+    Bewertet eine 7-Karten-Hand
+    Rückgabe: (Kategorie, Tiebreaker-Liste)
     """
 
-    values = [c[0] for c in cards]
-    suits_list = [c[1] for c in cards]
+    ranks = [rank_value[c[0]] for c in cards]
+    suits = [suit_value[c[1]] for c in cards]
 
-    nums = sorted([rank_value[v] for v in values], reverse=True)
+    rank_counts = [0] * 15
+    suit_counts = [0] * 4
 
-    # Wheel Straight (A,2,3,4,5)
-    nums_unique = sorted(set(nums), reverse=True)
-    if 14 in nums_unique:
-        nums_unique.append(1)
+    for r, s in zip(ranks, suits):
+        rank_counts[r] += 1
+        suit_counts[s] += 1
 
-    counter = Counter(values)
-    most_common = counter.most_common()
-
-    # Flush
-    flush_suit = None
-    for suit, count in Counter(suits_list).items():
+    # Flush prüfen
+    flush_suit = -1
+    for s, count in enumerate(suit_counts):
         if count >= 5:
-            flush_suit = suit
-            break
-    flush_nums = []
-    if flush_suit:
-        flush_nums = sorted([rank_value[c[0]] for c in cards if c[1] == flush_suit], reverse=True)
-
-    # Straight
-    straight_high = None
-    for i in range(len(nums_unique) - 4):
-        window = nums_unique[i:i+5]
-        if window[0] - window[4] == 4:
-            straight_high = window[0]
+            flush_suit = s
             break
 
-    # Straight Flush
-    if flush_suit:
-        flush_cards = [rank_value[c[0]] for c in cards if c[1] == flush_suit]
-        flush_unique= sorted(set(flush_cards), reverse=True)
-        if 14 in flush_unique:
-            flush_unique.append(1)
-        for i in range(len(flush_unique) - 4):
-            window = flush_unique[i:i+5]
-            if window[0] - window[4]  == 4:
-                if window[0] == 14:
-                    return 9, [14]  # Royal Flush
-                return 8, [window[0]]  # Straight Flush
+    # Straight prüfen
+    bitmask = 0
+    for r in range(2, 15):
+        if rank_counts[r] > 0:
+            bitmask |= 1 << r
+
+    wheel_mask = (1 << 14) | (1 << 5) | (1 << 4) | (1 << 3) | (1 << 2)
+
+    straight_high = 0
+    if (bitmask & wheel_mask) == wheel_mask:
+        straight_high = 5
+    else:
+        for high in range(14, 5, -1):
+            seq_mask = 0b11111 << (high - 4)
+            if (bitmask & seq_mask) == seq_mask:
+                straight_high = high
+                break
+
+    # Straight und Royal Flush prüfen
+    if flush_suit != -1:
+        flush_bitmask = 0
+        for i in range(7):
+            if suits[i] == flush_suit:
+                flush_bitmask |= 1 << ranks[i]
+
+        if (flush_bitmask & wheel_mask) == wheel_mask:
+            return 8, [5]
+
+        for high in range(14, 5, -1):
+            seq_mask = 0b1111 << (high - 4)
+            if (flush_bitmask & seq_mask) == seq_mask:
+                if high == 14:
+                    return 9, [14]
+                return 8, [high]
+
+    counts_sorted = sorted(
+        [(cnt, r) for r, cnt in enumerate(rank_counts) if cnt > 0],
+        reverse=True
+    )
 
     # Quads
-    if most_common[0][1] == 4:
-        return 7, [rank_value[most_common[0][0]]]
+    if counts_sorted[0][0] == 4:
+        kicker = max(r for r, c in enumerate(rank_counts) if c > 0 and r != counts_sorted[0][1])
+        return 7, [counts_sorted[0][1], kicker]
 
     # Full House
-    if most_common[0][1] == 3 and most_common[1][1] >=2:
-        return 6, [rank_value[most_common[0][0]], rank_value[most_common[1][0]]]
+    if counts_sorted[0][0] == 3 and counts_sorted[1][0] >= 2:
+        return 6, [counts_sorted[0][1], counts_sorted[1][1]]
 
     # Flush
-    if flush_suit:
-        return 5, flush_nums[:5]
+    if flush_suit != -1:
+        flush_cards = sorted(
+            [ranks[i] for i in range(7) if suits[i] == flush_suit],
+            reverse=True
+        )
+        return 5, flush_cards[:5]
 
-    #Straight
-    if straight_high:
+    # Straight
+    if straight_high > 0:
         return 4, [straight_high]
 
     # Trips
-    if most_common[0][1] == 3:
-        return 3, [rank_value[most_common[0][0]]]
+    if counts_sorted[0][0] == 3:
+        kickers = [r for r, c in enumerate(rank_counts) if c > 0 and r != counts_sorted[0][1]]
+        kickers.sort(reverse=True)
+        return 3, [counts_sorted[0][1]] + kickers[:2]
 
     # Two Pair
-    if most_common[0][1] == 2 and most_common[1][1] == 2:
-        return 2, [rank_value[most_common[0][0]], rank_value[most_common[1][0]]]
+    pairs = [r for r, c in enumerate(rank_counts) if c == 2]
+    if len(pairs) >= 2:
+        pairs.sort(reverse=True)
+        kicker = max(r for r, c in enumerate(rank_counts) if c > 0 and r not in pairs[:2])
+        return 2, pairs[:2] + [kicker]
 
-    # Pair
-    if most_common[0][1] == 2:
-        return 1, [rank_value[most_common[0][0]]]
+    # One Pair
+    if len(pairs) == 1:
+        kicker = [r for r, c in enumerate(rank_counts) if c >0 and r != pairs[0]]
+        kicker.sort(reverse=True)
+        return 1, [pairs[0]] + kicker[:3]
 
     # High Card
-    return 0, sorted([rank_value[v] for v in values], reverse=True)
+    high_cards = sorted([r for r, c in enumerate(rank_counts) if c > 0], reverse=True)
+    return 0, high_cards[:5]
